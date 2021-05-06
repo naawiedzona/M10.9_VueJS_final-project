@@ -1,12 +1,12 @@
+<!--    Album  with the images-->
 <template>
   <div>
-    <h1 id="title">Pictures in Album</h1>
-    <h1>Album {{ $route.params.id }}</h1>
+    <button id="btn-prev" @click="$router.go(-1)">Back</button>
+    <h1 id="title">Album {{ $route.params.id }}</h1>
     <div class="pictures-in-album">
     <div class="picture" v-for="(picture, index) in pictures" :key="index"> 
     <img :src="picture.url" @click="infoPicture()">
     </div>
-    <!--     en el modal ->       {{albumId}}   {{url}}  {{thumbnailUrl}}       -->
     </div>
      <div id="moreInfo">
         <div id="modal">
@@ -15,39 +15,33 @@
             <button id="btn-close" @click="closeModal()">X</button>
         </div>
         <!--     modal body     -->
-        <p>asdefd</p>
+        <p>picture title :</p>
+        <p>picture id : </p>
+        <!-- <img :src="picture.thumbnailUrl"> -->
+        <p></p>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-
-
 export default {
   name: 'Picture',
-  components: {
-   
-  },
-  props: [
-    'albumId' , 'id' , 'title' , 'url' , 'thumbnailUrl'
-  ],
   methods: {
     infoPicture () {
-      this.$emit('moreInfo', this.id);
+      //this.$emit('moreInfo', this.id);
       document.querySelector("#moreInfo").style.display="block"
     },
     closeModal() {
       document.querySelector("#moreInfo").style.display="none"
     }
   },
-  computed:{
+    computed:{
       pictures () {
       return this.$store.state.pictures;
     },
-  mounted() {
-    return this.$store.dispatch("getPictures");
-  } 
+      mounted() {
+      return this.$store.dispatch("getPictures");
+    } 
   }
 }
 </script>
@@ -73,8 +67,6 @@ export default {
   color: #42b983;
   margin: 30px;
 }
-
-
 #moreInfo{
   display: none;
   background: rgba(0, 0, 0, 0.767);
@@ -91,7 +83,7 @@ export default {
   width:500px;
   height: 300px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 150px;
 }
 #modal-header{
   display: flex;
@@ -107,5 +99,20 @@ export default {
 } 
 #btn-close:hover{
   opacity: 0.7;
+}
+#btn-prev{
+  background: pink;
+  border: 1px solid pink;
+  color: white;
+  margin-top: 40px;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+#btn-prev:hover{
+  opacity: 0.7;
+  color: #42b983;
 }
 </style>

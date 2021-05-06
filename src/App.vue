@@ -7,13 +7,13 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/users">Users</router-link> |
       <router-link to="/pictures">Pictures</router-link>
-      <input type="text" v-model="searchInput">
+      <input id="searchInput" type="text" placeholder="users's name" v-model="searchInput">
     </div>
      <transition name="view">
     <router-view class="router-view"/>
     </transition>
     <footer>
-      <p>Copyright 2021 </p>
+      <p>Copyright 2021</p>
     </footer>
   </div>
 </template>
@@ -33,7 +33,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
 }
-
 #nav {
   padding: 15px;
   display: flex;
@@ -52,6 +51,10 @@ export default {
 
 #nav a.router-link-exact-active {
   color: pink;
+}
+#searchInput{
+  color: #42b983;
+  height: 30px;
 }
 footer{
   background: black;

@@ -25,7 +25,15 @@ const routes = [
     component: () => import('../components/Picture.vue')
   } 
 ]
-
+/* {
+  path: "/shop",
+  name: "Shop",
+  component: () => import("../views/Shop.vue"),
+  children: [
+    { path: "/shop/food", component: Food },
+    { path: "/shop/drinks", component: Drinks },
+  ],
+}, */
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,

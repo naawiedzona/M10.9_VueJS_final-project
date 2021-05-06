@@ -1,20 +1,17 @@
+<!--    gallery with albums    -->
 <template>
   <div class="pictures">
     <button id="btn-prev" @click="$router.go(-1)">Back</button>
     <h1 id="page-title">Gallery</h1>
-    
     <div class="albums-container">
       <Album class="album"
       v-for="(album, index) in albums" :key="index"
       :album="album"></Album>
     </div>
-   
   </div>
 </template>
 <script>
-
 import Album from '../components/Album'
-
 export default {
   name: 'Pictures',
   components: {
@@ -41,9 +38,7 @@ export default {
 #page-title {
   color: #42b983;
   margin: 40px;
-  
 }
-
 .albums-container{
   display: flex;
   flex-wrap: wrap;
@@ -61,7 +56,6 @@ export default {
   align-items: stretch;
   height: 200px;
 }
-
 #btn-prev{
   background: pink;
   border: 1px solid pink;
@@ -74,8 +68,7 @@ export default {
 }
 #btn-prev:hover{
   opacity: 0.7;
+  color: #42b983;
+  border: 1px solid #42b983;
 }
-
-
-
 </style>

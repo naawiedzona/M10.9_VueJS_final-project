@@ -48,5 +48,7 @@ export default {
 
 #btn-prev:hover{
   opacity: 0.7;
+  color: #42b983;
+  border: 1px solid #42b983;
 }
 </style>
