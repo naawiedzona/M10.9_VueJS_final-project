@@ -5,15 +5,16 @@
     id="title">Home</h1>
     
     <div id="container">
-    <consulted-pictures></consulted-pictures>
-    <consulted-users></consulted-users>
+      <consulted-users></consulted-users>
+    <consulted-albums></consulted-albums>
+    
     </div>
   </div>
 </template>
 
 <script>
 import ConsultedUsers from '../components/ConsultedUsers'
-import ConsultedPictures from '../components/ConsultedPictures'
+import ConsultedAlbums from '../components/ConsultedAlbums'
 
 
 
@@ -21,7 +22,7 @@ export default {
   name: 'Home',
   components: {
    'consulted-users':ConsultedUsers,
-   'consulted-pictures':ConsultedPictures
+   'consulted-albums':ConsultedAlbums
   }
 }
 </script>

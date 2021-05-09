@@ -5,12 +5,15 @@
         <img src="./assets/logo.png" alt="vue logo">
       </div>
       <router-link to="/">Home</router-link> |
+      
       <router-link to="/users">Users</router-link> |
       <router-link to="/pictures">Pictures</router-link>
       <input id="searchInput" type="text" placeholder="users's name" v-model="searchInput">
     </div>
      <transition name="view">
+<keep-alive>
     <router-view class="router-view"/>
+</keep-alive>
     </transition>
     <footer>
       <p>Copyright 2021</p>
@@ -22,8 +25,17 @@
 export default {
   data () {
     return {
-      searchInput:''
     }
+  },
+  computed:{
+    searchInput:{
+       get() {
+         return this.$store.state.search;
+       },
+       set(value) {
+         this.$store.commit("SetSearch", value);
+       }
+     },
   }
 }
 </script>
@@ -66,10 +78,10 @@ footer{
   justify-content: center;
 }
 .view-enter-active, .view-leave-active{
-transition: opacity 0.5s ease-in-out, transform 0.5s ease;
+transition: opacity 0.4s ease-in-out, transform 0.4s ease;
 }
 .view-enter-active {
-  transition-delay: 0.5s;
+  transition-delay: 0.4s;
 }
 .view-enter, .view-leave-to {
 opacity: 0;

@@ -3,39 +3,44 @@
     <button id="btn-prev" @click="$router.go(-1)">Back</button>
     <h1 id="page-title">Users</h1>
     <div class="users-container">
+      
     <user
     class="user"
-    v-for="(user,index) in users"
+    v-for="(user,index) in FilteredUsers"
     :key="index"
     :id="user.id"
     :name="user.name"
     :username="user.username"
     :email="user.email"
     :adress="user.adress"
-    :infoUser="infoUser(infoUser)"></user>
-    </div>
+    :infoUser="infoUser"></user>
 
-
-    <!--modal aqui-->
-<div id="moreInfo">
-        <div id="modal">
+    
+    <transition name="modal">
+    <div v-if="FilteredUsers.length==0">
+      <div id="no-users">
+         <div id="modal">
           <div id="modal-header">
-            <h3>Consulted picture</h3> 
+            <h3>We didn't find the user</h3> 
             <button id="btn-close" @click="closeModal()">X</button>
         </div>
-        <!--     modal body     -->
-        <p>picture title :</p>
-        <p>picture id : </p>
-        <!-- <img :src="picture.thumbnailUrl"> -->
-        <p></p>
+        <div id="modal-body">
+          <p>No user found</p>
+        </div>
+      </div>
       </div>
     </div>
+    </transition>
 
-<!--modal fin-->
+    </div>
   </div>
 </template>
 <script>
-import User from '../components/User'
+import User from '../components/User';
+
+
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Users',
   components: {
@@ -49,26 +54,18 @@ export default {
   computed:{
   users() {
     return this.$store.state.users
-    },
-  /*  
-    // v-model search input
-     searchInput:{
-       get() {
-         return store.state.filters.search;
-       },
-       set(value) {
-         store.commit("SetSearch", value);
-       }
-     }
-   } 
-   */
+    },     
+     ...mapGetters(['FilteredUsers'])
   },
   mounted() {
     this.$store.dispatch("getUsers");
   },
   methods: {
     infoUser (infosUser) {
-      this.id = infosUser
+      this.id = infosUser;
+    },
+     closeModal() {
+      document.querySelector("#no-users").style.display="none"
     }
   }
 }
@@ -105,8 +102,7 @@ export default {
 }
 
 
-#moreInfo{
-  display: none;
+#no-users{
   background: rgba(0, 0, 0, 0.767);
   position: fixed;
   right: 0;
@@ -118,8 +114,7 @@ export default {
   border: 1px solid  #42b983;
   background: rgba(255, 255, 255, 0.856);
   color:  #42b983;
-  width:500px;
-  height: 300px;
+  width: 30%;
   margin: 0 auto;
   margin-top: 150px;
 }
@@ -137,5 +132,19 @@ export default {
 } 
 #btn-close:hover{
   opacity: 0.7;
+}
+
+
+.modal-enter-active, .modal-leave-active{
+transition: opacity 0.2s ease-in-out
+}
+.modal-enter-active {
+  transition-delay: 0.2s;
+}
+.modal-enter, .modal-leave-to {
+opacity: 0;
+}
+.modal-enter-to, .modal-leave {
+   opacity: 1;
 }
 </style>

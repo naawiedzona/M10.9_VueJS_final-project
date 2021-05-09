@@ -3,6 +3,7 @@
     <h2 id="title">{{name}}</h2>
     <button @click="infoUser()">More information</button>
   </div>
+
 </template>
 <script>
 export default {
@@ -10,8 +11,7 @@ export default {
   props:['name','id', 'username', 'email', 'adress'],
   methods: {
     infoUser() {
-      alert(this.name + this.email)
-      this.$emit('infoUser', this.id)
+      this.$store.commit('infoUserStore', this.id)
     }
   }
 }

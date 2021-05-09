@@ -1,20 +1,20 @@
 <template>
-  <div class="consulted-pictures">
-    <h1 id="title">Consulted Pictures</h1>
+  <div class="consulted-albums">
+    <h1 id="title">Consulted Albums</h1>
   </div>
 </template>
 <script>
 
 
 export default {
-  name: 'ConsultedPictures',
+  name: 'ConsultedAlbums',
   components: {
    
   }
 }
 </script>
 <style scoped>
-.consulted-pictures{
+.consulted-albums{
     border: 1px solid #42b983;
     margin: 20px;
     padding: 10px;
