@@ -26,6 +26,7 @@ export default {
     border: 1px solid #42b983;
     margin: 20px;
     padding: 10px;
+    max-width: 40%;
 }
 #title {
   color: #42b983;
@@ -33,5 +34,10 @@ export default {
 .list{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.list span {
+  margin-left: 20px;
+  color: #42b983;
 }
 </style>

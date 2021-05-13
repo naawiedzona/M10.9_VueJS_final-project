@@ -1,19 +1,28 @@
 <template>
   <div class="users">
+     <Modal v-if="modalVisible" @close="modalVisible = false" :user="modalData" />
     <button id="btn-prev" @click="$router.go(-1)">Back</button>
     <h1 id="page-title">Users</h1>
     <div class="users-container">
-      
+
+
+
+   <!--     onclicknative para que funcione en el componente  -->
+
+   
     <user
     class="user"
     v-for="(user,index) in FilteredUsers"
+    @openModal="openModal(user)" 
     :key="index"
     :id="user.id"
     :name="user.name"
     :username="user.username"
     :email="user.email"
     :adress="user.adress"
-    :infoUser="infoUser"></user>
+    :infoUser="infoUser"
+  
+    ></user>
 
     
     <transition name="modal">
@@ -36,19 +45,22 @@
   </div>
 </template>
 <script>
+import Modal from '../components/Modal'
 import User from '../components/User';
-
 
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'Users',
   components: {
-   'user':User
+   'user':User,
+   Modal
   },
   data() {
     return {
-      infosUser:''
+      infosUser:'',
+      modalVisible: false,
+      modalData: null
     }
   },
   computed:{
@@ -66,7 +78,11 @@ export default {
     },
      closeModal() {
       document.querySelector("#no-users").style.display="none"
-    }
+    },
+     openModal(data) {
+      this.modalData = data
+      this.modalVisible = true
+    },
   }
 }
 
@@ -74,6 +90,7 @@ export default {
 
 
 </script>
+
 <style scoped>
 #page-title {
   color: #42b983;

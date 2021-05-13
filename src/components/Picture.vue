@@ -1,19 +1,20 @@
 <!--                          Album  with the images               -->
 <template>
   <div>
+    <Modal v-if="modalVisible" @close="modalVisible = false" :picture="modalData"/>
     <button id="btn-prev" @click="$router.go(-1)">Back</button>
     <h1 id="title">Album {{ $route.params.id }}</h1>
     <div class="pictures-in-album">
     <div class="picture" v-for="(picture, index) in picturesbyAlbum" :key="index"> 
-    <img class="picture-box" :src="picture.url" @click="infoPicture()">
-<transition name="modal">
+    <img class="picture-box" :src="picture.url" @click="openModal(picture)">
+<!-- 
      <div id="moreInfo">
         <div id="modal">
           <div id="modal-header">
             <h3>Consulted picture</h3> 
             <button id="btn-close" @click="closeModal()">X</button>
         </div>
-        <!--     modal body     -->
+     modal body
         <div class="modal-body">
         <h3><span>Picture title: </span>{{ picture.title | upperCase }}</h3>
         <h3><span>Picture id: </span>{{picture.id}}</h3>
@@ -22,7 +23,7 @@
         <p></p>
       </div>
     </div>
-</transition>
+ -->
 
     </div>
     </div>
@@ -30,17 +31,33 @@
   </div>
 </template>
 <script>
+import Modal from './Modal';
+
 export default {
+  components:{
+    Modal
+  },
   name: 'Picture',
-  methods: {
-    infoPicture () {
-      // thid.id
-      this.$store.commit('infoPictureStore', this.id);
-      document.querySelector("#moreInfo").style.display="block";
-    },
-    closeModal() {
-      document.querySelector("#moreInfo").style.display="none";
+    data() {
+    return {
+      modalVisible: false,
+      modalData: ""
     }
+     },
+  methods: {
+    // infoPicture () {
+    //   // thid.id
+    //   this.$store.commit('infoPictureStore', this.id);
+    //   document.querySelector("#moreInfo").style.display="block";
+    // },
+    // closeModal() {
+    //   document.querySelector("#moreInfo").style.display="none";
+    // }
+    openModal(picture) {
+      this.modalData = picture
+      this.modalVisible = true
+      this.$store.commit('infoPictureStore', picture.id); 
+    },
   },
     computed:{
       pictures () {
@@ -84,8 +101,8 @@ export default {
   color: #42b983;
   margin: 30px;
 }
-#moreInfo{
-  display: none;
+/* #moreInfo{
+  display:none;
   z-index: 2;
   background: rgba(0, 0, 0, 0.849);
   position: fixed;
@@ -93,8 +110,8 @@ export default {
   left: 0;
   bottom: 0;
   top: 0;
-}
-#modal{
+} */
+/* #modal{
   border: 1px solid  #42b983;
   background: rgba(255, 255, 255, 0.856);
   color:  #42b983;
@@ -110,7 +127,7 @@ export default {
 }
 .modal-body {
   padding: 10px;
-}
+} */
 h3{
   display: flex;
 }

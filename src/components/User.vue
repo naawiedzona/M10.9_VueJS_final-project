@@ -12,6 +12,7 @@ export default {
   methods: {
     infoUser() {
       this.$store.commit('infoUserStore', this.id)
+      this.$emit('openModal')
     }
   }
 }

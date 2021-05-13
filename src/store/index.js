@@ -38,7 +38,7 @@ export default new Vuex.Store({
           picture.count++;
         }
       });
-    }
+    },
   },
   actions: {
     getUsers({ commit }) {
